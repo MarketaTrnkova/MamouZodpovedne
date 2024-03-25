@@ -1,0 +1,31 @@
+*{
+    box-sizing: border-box;
+}
+
+h1, h2{
+    text-align: center;
+}
+
+.header-top-banner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: pink;
+}
+
+.header-menu{
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+}
+
+.header-main-banner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header-main-banner-content-wrapper{
+    display: flex;
+    justify-content: space-around;
+}

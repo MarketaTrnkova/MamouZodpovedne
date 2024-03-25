@@ -3,13 +3,37 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-
-	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Web</title>
+	<link rel="stylesheet" type="text/css" href="{$basePath}/css/style.css">
+	<title>{ifset title}{include title|stripHtml} | {/ifset}mamouZodpovedne.cz</title>
 </head>
 
 <body>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
-
+	<header>
+		<div class="header-top-banner">
+			<div class="logo-wrapper"><h3>mamouzodpovedne</h3></div>
+			<div class="user-icon-wrapper">uzivatel</div>
+		</div>
+		<nav>
+			<ul class="header-menu">
+				<li><a href="{link Hracky:Default}">Hračky</a></li>
+				<li><a href="{link VybavaProMiminko:Default}">Výbava pro miminko</a></li>
+				<li><a href="{link DetskyPokoj:Default}">Dětský pokoj</a></li>
+				<li><a href="{link KurzyProRodice:Default}">Kurzy pro rodiče</a></li>
+				<li><a href="{link Diskuse:Default}">Diskuse</a></li>
+			</ul>
+		</nav>
+		<div class="header-main-banner">
+			<h2>Zodpovědný výběr hraček a příslušenství podporující správný vývoj dítěte</h2>
+			<div class="header-main-banner-content-wrapper">
+				<div> <p>popisek1</p> </div>
+				<div> <p>popisek2</p> </div>
+				<div> <p>popisek3</p> </div>
+				<div> <p>popisek4</p> </div>
+				<div> <p>popisek5</p> </div>
+			</div>
+		
+		</div>
+	</header>
 	{include content}
 
 	{block scripts}

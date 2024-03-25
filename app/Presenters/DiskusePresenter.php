@@ -6,7 +6,6 @@ namespace App\Presenters;
 
 use Nette;
 
+class DiskusePresenter extends Nette\Application\UI\Presenter{
 
-final class HomePresenter extends Nette\Application\UI\Presenter
-{
 }
