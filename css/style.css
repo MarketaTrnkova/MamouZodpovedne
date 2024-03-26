@@ -32,3 +32,30 @@ h1, h2{
 .header-main-banner-content{
     border: 1px solid pink;
 }
+/* Product list carousel - homepage */
+
+.product-list-wrapper{
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    gap: 0.5em;
+    padding: 15px;
+}
+.product-card{
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 1;
+    align-items: center;
+    text-align: center;
+}
+.product-card img{
+    width: 100%;
+}
+.product-card-content a{
+    text-decoration: none;
+    color: black;
+}
+.product-card-content:hover{
+    box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.183);
+    transform: scale(1.04);
+}

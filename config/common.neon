@@ -9,9 +9,9 @@ application:
 
 
 database:
-	dsn: 'sqlite::memory:'
-	user:
-	password:
+	dsn: 'pgsql:host=postgresql.r3.websupport.cz;port=5432;dbname=mamouzodpovedne'
+	user: 'marketa'
+	password: 'testovaciHeslo123'
 
 
 latte:

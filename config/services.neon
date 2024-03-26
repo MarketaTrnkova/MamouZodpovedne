@@ -1,6 +1,6 @@
 services:
 	- App\Router\RouterFactory::createRouter
-
+	- App\Models\ProduktManager
 
 search:
 	-	in: %appDir%
