@@ -15,7 +15,7 @@ final class DomuPresenter extends Nette\Application\UI\Presenter
     ){}
 
     public function renderDefault(){
-        $vybavaProMiminkaProdukty = $this->produktManager->vypisProduktyVybavaProMiminka();
-        $this->template->vybavaProMiminkaProdukty = $vybavaProMiminkaProdukty;
+        $hrackyDo3Produkty = $this->produktManager->vypisProdukty('hrackyDo3');
+        $this->template->hrackyDo3Produkty = $hrackyDo3Produkty;
     }
 }

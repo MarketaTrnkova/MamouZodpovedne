@@ -2,14 +2,14 @@
 
 {block content}
 
-<h2>Výbava pro miminka</h2>
+<h2>Hračky pro děti</h2>
 <div class="product-list-wrapper">
-   {foreach $vybavaProMiminkaProdukty as $produkt}
+   {foreach $hrackyDo3Produkty as $produkt}
     <div class="product-card">
         <div class="product-card-content">
             <a href="{$produkt['UrlObchod']}" target="blank">
                 <p><strong>{$produkt["Nazev"]}</strong></p>
-                <img src="{$produkt["HlavniObrazek"]}">
+                <img src="./{$produkt["HlavniObrazek"]}">
                 <p>{$produkt["Popis"]}</p>
                 <p>{$produkt["Cena"]},- Kč</p>
             </a>

@@ -5,7 +5,6 @@ namespace App\Models;
 
 use Nette;
 use Nette\Database\Explorer;
-use Nette\PhpGenerator\Property;
 
 class ProduktManager{
     public function __construct
@@ -13,13 +12,14 @@ class ProduktManager{
         private Explorer $explorer
     ){}
 
-    //kategorie VybavaProMiminka ma sloupecek KategorieId = 1
-    public function vypisProduktyVybavaProMiminka(): array|false{
+    //kod pro kategorii Hracky do 3 let = hrackyDo3
+    public function vypisProdukty(string $kodKategorie): array|false{
         $vysledek = $this->explorer
-        ->table('Produkty_ProduktyKategorie')
-        ->select('Produkty.Nazev, Produkty.HlavniObrazek, Produkty.Popis, Produkty.Cena, Produkty.UrlSrovnavac, Produkty.UrlObchod')
-        ->where('Produkty_ProduktyKategorie.ProduktyKategorieId', 1)
-        ->joinWhere('Produkty', 'Produkty.ProduktyId = Produkty_ProduktyKategorie.ProduktyId')
+        ->query('SELECT "Produkty"."Nazev", "Produkty"."Cena", "Produkty"."Popis", "Produkty"."HlavniObrazek", "Produkty"."UrlObchod", "Produkty"."UrlSrovnavac" 
+        FROM "Produkty" 
+        INNER JOIN "Produkty_ProduktyKategorie" ON "Produkty_ProduktyKategorie"."ProduktyId" = "Produkty"."ProduktyId"
+        INNER JOIN "ProduktyKategorie" ON "Produkty_ProduktyKategorie"."ProduktyKategorieId" = "ProduktyKategorie"."ProduktyKategorieId" 
+        WHERE "ProduktyKategorie"."Kod" = ?', $kodKategorie)
         ->fetchAll();
         return $vysledek;
     }
