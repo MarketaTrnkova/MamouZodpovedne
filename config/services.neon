@@ -1,9 +1,9 @@
 services:
 	- App\Router\RouterFactory::createRouter
-	- App\Models\ProduktManager
 
 search:
-	-	in: %appDir%
+	-	in: %appDir%/Models
 		classes:
+			- *Manager
 			- *Factory
 			- *Facade

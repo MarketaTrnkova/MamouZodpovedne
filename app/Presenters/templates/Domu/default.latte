@@ -1,7 +1,11 @@
 {layout '../@layout.latte'}
 
 {block content}
-
+{if ($jePrihlasen)}
+    <p>Jsi prihlasen</p>
+{else}
+    <p>Nejsi prihlasen<p>
+{/if}
 <h2>Hračky pro děti</h2>
 <div class="product-list-wrapper">
    {foreach $hrackyDo3Produkty as $produkt}
@@ -14,9 +18,13 @@
                 <p>{$produkt["Cena"]},- Kč</p>
             </a>
         </div>
-        <a href="{$produkt['UrlSrovnavac']}" target="blank">Srovnani vyvoje ceny</a>
+        <a href="{$produkt['UrlSrovnavac']}" target="blank" class="srovnavacCenyBtn">Srovnani vyvoje ceny</a>
     </div>
-
     {/foreach}
+    {control prihlasitSe}
+    {control registrovatSe}
+    {control odhlasitSe}
+    
+
 </div>
 {/block content}

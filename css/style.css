@@ -48,6 +48,7 @@ h1, h2{
     align-items: center;
     text-align: center;
     justify-content: center;
+    padding: 10px;
 }
 .product-card img{
    height: 250px;
@@ -59,4 +60,9 @@ h1, h2{
 .product-card-content:hover{
     box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.183);
     transform: scale(1.04);
+}
+.srovnavacCenyBtn{
+    display: block;
+    margin: 10px;
+    padding: 10px;
 }
