@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Exception;
 use Nete;
 
 use Nette\Database\Explorer;
@@ -29,28 +30,65 @@ class UzivateleManager
                 'HashHeslo'=> $hashHeslo
             ]);
             if ($vlozenyRadek instanceof \Nette\Database\Table\ActiveRow){
-                return "Registrace proběhla v pořádku";
+                $this->prihlasMe($form, $dataFomulare);
+                return 'Registrace proběhla v pořádku';
             }
         } catch(UniqueConstraintViolationException $e){
-            $form->addError('Nesprávné údaje.');
+            $form->addError('Nevalidní data.');
         }
     }
 
     public function prihlasMe(Form $form, \stdClass $dataFomulare){
         try{
             $radekZDb = $this->explorer->table('Uzivatele')->where('Email', $dataFomulare->email)->fetch();
-            $jeShoda = password_verify($dataFomulare->heslo, $radekZDb->HashHeslo);
-            if ($radekZDb && $jeShoda){
-                $_SESSION["jePrihalsen"] = true;
-                $this->jePrihlasen = true; 
-                return "Přihlášení proběhlo v pořádku";
+            if ($radekZDb){
+                $jeShoda = password_verify($dataFomulare->heslo, $radekZDb->HashHeslo);
+                if ($jeShoda){
+                    $_SESSION["email"] = $dataFomulare->email;
+                    $_SESSION["prezdivka"] = $radekZDb->Prezdivka;
+                    $_SESSION["jePrihalsen"] = true;
+                    $this->jePrihlasen = true; 
+                    return;
+                }else{
+                    $form->addError('Neplatné údaje.');
+                }
+            }else{
+                $this->odhlasMe();
+                $form->addError('Uživatel s daným emailem nebyl nalezen');
             }
-        } catch(UniqueConstraintViolationException $e){
-            $form->addError('Nesprávné údaje.');
+        }catch(Exception $e){
+            $form->addError('Neplatné údaje.');
             $this->jePrihlasen = false; 
         }
     }
+    public function zkontrolujPrezdivku($input, $data){
+        try{
+            $radekZDb = $this->explorer->table('Uzivatele')->where('Prezdivka', $data)->fetch();
+            if ($radekZDb){
+                return false; // Přezdívka již existuje
+            }else {
+                return true; // Přezdívka je dostupná
+            }
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
+    public function zkontrolujEmail ($input, $data){
+        try{
+           $radekZDb = $this->explorer->table('Uzivatele')->where('Email', $data)->fetch();
+            if ($radekZDb){
+                return false; // Email již existuje
+            }else {
+                return true; // Email je dostupný
+            }
+        }catch(Exception $e){
+            return false;
+        }
+    }
     public function odhlasMe(){
+        unset($_SESSION["email"]);
+        unset($_SESSION["prezdivka"]);
         unset($_SESSION["jePrihlasen"]);
         $this->jePrihlasen = false; 
     }

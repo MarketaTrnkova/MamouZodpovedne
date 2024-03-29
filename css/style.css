@@ -32,6 +32,47 @@ h1, h2{
 .header-main-banner-content{
     border: 1px solid pink;
 }
+.modalBtn{
+    cursor: pointer;
+}
+dialog{
+    padding: 2em;
+    border-radius: 20px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+dialog input[type='text'], textarea{
+    padding: 5px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+dialog::backdrop {
+    background-color: #ffcecb9c;
+    border: none;
+  }
+.dialogBtns{
+    display: flex;
+    justify-content: center;
+}
+.prihlasitSeForm, .registrovatSeForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    margin: 0.5rem;
+}
+
+.hidden{
+    display: none;
+}
+.show{
+    display: flex;
+}
+.activeBtn{
+    background-color: aqua;
+}
 /* Product list carousel - homepage */
 
 .product-list-wrapper{

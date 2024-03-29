@@ -10,9 +10,30 @@
 <body>
 	<header>
 		<div class="header-top-banner">
-			<div class="logo-wrapper"><h3>mamouzodpovedne</h3></div>
-			<div class="user-icon-wrapper">uzivatel</div>
+			<a href="{link Domu:Default }" class="logo-wrapper"><h3>mamouzodpovedne</h3></a>
+			<div class="user-icon-wrapper">&#128100; {if $jePrihlasen}<span>{$sessionPoleDat['prezdivka']}</span>{/if}</div>
 		</div>
+
+		<dialog class="prihlasit_registrovat_dialog">
+			<div class="dialogBtns {if $jePrihlasen}hidden{/if}">
+				<button class="dialogPrihlasitSeBtn activeBtn">Přihlásit se</button>
+				<button class="dialogRegistrovatSeBtn">registrovat</button></div>
+			<div class="dialogFormWrapper {if $jePrihlasen}hidden{/if}">
+				<div class="prihlasitSeForm">
+					{control prihlasitSe}
+				</div>
+				<div class="registrovatSeForm hidden">
+					{control registrovatSe}
+				</div>
+			</div>
+			
+			{if $jePrihlasen}
+			<div class="odhlasitSeForm">
+				{control odhlasitSe}
+			</div>
+			{/if}
+		</dialog>
+
 		<nav>
 			<ul class="header-menu">
 				<li><a href="{link Hracky:Default}">Hračky</a></li>
@@ -36,8 +57,10 @@
 	</header>
 	{include content}
 
+
 	{block scripts}
-	<script src="https://unpkg.com/nette-forms@3/src/assets/netteForms.js"></script>
+		<script src="https://unpkg.com/nette-forms@3/src/assets/netteForms.js"></script>
+		<script src="{$basePath}/js/layout.js"></script>
 	{/block}
 </body>
 </html>
