@@ -9,14 +9,14 @@ use Nete;
 use Nette\Database\Explorer;
 use Nette\Application\UI\Form;
 use Nette\Database\UniqueConstraintViolationException;
+use Nette\Http\Session;
 
 class UzivateleManager
 {
-    private $explorer;
     public $jePrihlasen;
-    public function __construct(Explorer $explorer)
-    {
-        $this->explorer = $explorer;
+    public function __construct(
+        private Explorer $explorer,
+        protected Session $session){
 
     }
 
@@ -44,9 +44,11 @@ class UzivateleManager
             if ($radekZDb){
                 $jeShoda = password_verify($dataFomulare->heslo, $radekZDb->HashHeslo);
                 if ($jeShoda){
-                    $_SESSION["email"] = $dataFomulare->email;
-                    $_SESSION["prezdivka"] = $radekZDb->Prezdivka;
-                    $_SESSION["jePrihalsen"] = true;
+                    $sessionSection = $this->session->getSection('Uzivatel');
+                    $sessionSection->email = $dataFomulare->email;
+                    $sessionSection->prezdivka = $radekZDb->Prezdivka;
+                    $sessionSection->uzivatelId = $radekZDb->UzivateleId;
+                    $sessionSection->jePrihlasen = true;
                     $this->jePrihlasen = true; 
                     return;
                 }else{
@@ -87,9 +89,10 @@ class UzivateleManager
         }
     }
     public function odhlasMe(){
-        unset($_SESSION["email"]);
-        unset($_SESSION["prezdivka"]);
-        unset($_SESSION["jePrihlasen"]);
+        $sessionSection = $this->session->getSection('Uzivatel');
+        $sessionSection->remove('email');
+        $sessionSection->remove('prezdivka');
+        $sessionSection->remove('jePrihlasen');
         $this->jePrihlasen = false; 
     }
 }

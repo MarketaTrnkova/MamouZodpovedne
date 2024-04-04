@@ -1,0 +1,58 @@
+{layout '../@layout.latte'}
+
+{block content}
+<h1>{$detailDiskuse->Nadpis}</h1>
+<div class="space-between">
+<p>&#128100 {$detailDiskuse->Prezdivka} | {$detailDiskuse->Cas|date:'d. n. y G:i'}</p>
+<p>&#128681 {$detailDiskuse->NazevKategorie} </p>
+</div>
+<p>{$detailDiskuse->Obsah}</p>
+<div class="komentare-k-diskusi">
+<h2>Komentáře k diskusi</h2>
+{if !$komentareKDiskusi}
+    <p>Diskuse nemá žádné komentáře</p>
+{/if}
+<div class="dialog-wrapper">
+{if $jePrihlasen}
+    <button class="napsat-komentar">Napsat komentář</button>
+    <dialog class="dialogNapsatKomentar">
+        {control vytvoritKomentar}
+    </dialog>
+{else}
+    <p>Pro přidání komentáře je nutné se přihlásit</p>
+    <button class="prihlasit-se-btn" onclick="otevriDialogoveOkno()">Přihlásit se</button>
+{/if}
+</div>
+{foreach $komentareKDiskusi as $komentar}
+    <div>
+        <p>&#128100{$komentar->AutorKomentare} | {$komentar->CasKomentare |date:'d. n. y G:i'}</p>
+    </div>
+    <p>{$komentar->ObsahKomentare}</p>
+      
+    {if $jePrihlasen}   
+                <button class="reagovat-btn" onclick="napsatReakciNaKomentar({$komentar->KomentareId})">Napsat reakci na komentář</button>
+                <dialog id="dialogReakce-{$komentar->KomentareId}">
+                    <div class="form-wrapper">
+                    {form vytvorReakciNaKomentar, 'id' =>$komentar->KomentareId }
+                        {input hlavniKomentarId, value => $komentar->KomentareId}
+                        <label for="textKomentare">Váš komentář</label>
+                        {input textKomentare}
+
+                        {input reakceSubmit}
+                    {/form}
+                </dialog>
+    {/if}
+
+    <p>Počet reakcí: {$komentar->PocetVedlejsichKomentaru}</p>
+    {if ($komentar->PocetVedlejsichKomentaru > 0 )}
+        {foreach $vedlejsiKomentare as $vedlejsiKomentar}
+            {if ($vedlejsiKomentar->HlavniKomentarId == $komentar->KomentareId)}
+                <div class="vedlejsi-komentare">
+                    <p>&#128100 {$vedlejsiKomentar->Prezdivka} | {$vedlejsiKomentar->Cas|date:'d. n. y G:i'}</p>
+                    <p>{$vedlejsiKomentar->Obsah}</p>
+                </div>
+            {/if}
+        {/foreach}
+    {/if}
+{/foreach}
+{/block content}

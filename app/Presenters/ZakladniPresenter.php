@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Presenters;
 
 use Nette;
-use App\Models\ProduktManager;
 use Nette\Application\UI\Form;
 use App\Models\UzivateleManager;
 use Nette\Http\Session;
@@ -13,7 +12,8 @@ use Nette\Http\Session;
 
 class ZakladniPresenter extends Nette\Application\UI\Presenter{
     public function __construct(
-        protected UzivateleManager $uzivateleManager
+        protected UzivateleManager $uzivateleManager,
+        protected Session $session
     ){
         parent::__construct();
     }
@@ -21,11 +21,12 @@ class ZakladniPresenter extends Nette\Application\UI\Presenter{
     public function beforeRender(){
         parent::beforeRender();
         $this->template->prihlasitSe = $this->createComponentPrihlasitSe();
-        if ($this->uzivateleManager->jePrihlasen || isset($_SESSION["prezdivka"])){
+        $sessionSection = $this->session->getSection('Uzivatel');
+        if ($this->uzivateleManager->jePrihlasen || isset($sessionSection->prezdivka)){
             $this->template->jePrihlasen = true;
             $this->template->sessionPoleDat = [
-            'email' => $_SESSION["email"],
-            'prezdivka' => $_SESSION["prezdivka"]
+            'email' => $sessionSection->get('email'),
+            'prezdivka' => $sessionSection->get('prezdivka')
             ];
         }else {
             $this->template->jePrihlasen = false;

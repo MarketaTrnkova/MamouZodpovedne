@@ -2,5 +2,43 @@
 
 {block content}
 <h1>Diskuse</h1>
+    <div class="dialog-wrapper">
+    {if $jePrihlasen}
+
+            <button class="vytvoritDiskusiBtn">Vytvořit diskusi</button>
+            <dialog class="vytvoritDiskusiDialog">
+                {control vytvoritDiskusi}
+            </dialog>
+    {else}
+        <p>Pro vytvoření nové diskuse je nutné se přihlásit</p>
+        <button class="prihlasit-se-btn" onclick="otevriDialogoveOkno()">Přihlásit se</button>
+    {/if}
+    </div>
+    <h2>Filtrovat diskuse podle kategorie</h2>
+    <div class="vyber-kategorii-wrapper">
+        {foreach $vsechnyKategorie as $kategorie}
+           <div class="kategorie-btn {if isset($aktivniKategorie) && ($aktivniKategorie ==$kategorie->Kod)}aktivniKategorie{/if}" kod-kategorie="{$kategorie->Kod}" onclick="vyberKategorii({$kategorie->Kod})" ><p>{$kategorie->Nazev}</p></div>
+        {/foreach}
+    </div>
+    {* do nadpisu h3 nize dam promennou, ktera bude zobrazovat nazev vybrane kategorie nebo defaultni hodnotu Nejnovější diskuse *}
+
+    <div class="vypis-diskusi">
+        <h3>{$vybranaKategorie ?? 'Nejnovější diskuse'}</h3>
+        {control vyberKategorii}
+        {foreach $vsechnyDiskuse as $diskuse}
+            <div class="space-between">
+                <p>&#128100 {$diskuse->Prezdivka} | {$diskuse->Cas|date:'d. n. y G:i'} </p>
+                <p>&#128681 {$diskuse->NazevKategorie}</p>
+            </div>
+            <p><strong> {$diskuse->Nadpis} </strong></p>
+            <p>{$diskuse->Obsah|truncate:400}</p>
+            <div class="space-between">
+                <p>&#128236 Počet komentářů: {$diskuse->PocetKomentaru} </p>
+                <a class="vstoupit-do-diskuse-btn"  href="{$basePath}/diskuse/{$diskuse->Url}">Vstoupit do diskuse</a>
+            </div>
+            <hr>
+        {/foreach}
+    
+    </div>
 
 {/block content}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang='cs'>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
@@ -11,7 +11,7 @@
 	<header>
 		<div class="header-top-banner">
 			<a href="{link Domu:Default }" class="logo-wrapper"><h3>mamouzodpovedne</h3></a>
-			<div class="user-icon-wrapper">&#128100; {if $jePrihlasen}<span>{$sessionPoleDat['prezdivka']}</span>{/if}</div>
+			<div class="user-icon-wrapper" onclick="otevriDialogoveOkno()">&#128100; {if $jePrihlasen}<span>{$sessionPoleDat['prezdivka']}</span>{/if}</div>
 		</div>
 
 		<dialog class="prihlasit_registrovat_dialog">
@@ -40,7 +40,7 @@
 				<li><a href="{link VybavaProMiminko:Default}">Výbava pro miminko</a></li>
 				<li><a href="{link DetskyPokoj:Default}">Dětský pokoj</a></li>
 				<li><a href="{link KurzyProRodice:Default}">Kurzy pro rodiče</a></li>
-				<li><a href="{link Diskuse:Default}">Diskuse</a></li>
+				<li><a href="{link Diskuse:default}">Diskuse</a></li>
 			</ul>
 		</nav>
 		<div class="header-main-banner">
