@@ -16,84 +16,49 @@ let kategorieBtn = document.querySelectorAll("[kod-kategorie]");
 let kategorieForm = document.querySelector("#frm-vyberKategorii");
 let kategorieInput = document.querySelector("input[name='vybranaKategorie']");
 
-
-
-function otevriDialogoveOkno(){
+/* dat sem parametr s nazvem elementu pro ktery se spusti showModal*/
+function otevriPrihlasovaciDialogoveOkno(){
     dialogPrihlasitRegistrovat.showModal();
 }
 
-   
-function napsatReakciNaKomentar(IdFormulare){
-        let dialogReakce = "dialogReakce-" + IdFormulare;
-        let dialogReakceElement =  document.getElementById(dialogReakce);
-        let hiddenInput = document.querySelector(`[id="${IdFormulare}"] input[name="hlavniKomentarId"]`);
-        hiddenInput.value = IdFormulare;
-        if(dialogReakceElement){
-            dialogReakceElement.showModal();
-
-            dialogReakceElement.addEventListener("click", (event)=>{
-                let souradniceDialogOkna = dialogReakceElement.getBoundingClientRect();
-                if(
-                    event.clientX < souradniceDialogOkna.left ||
-                    event.clientX > souradniceDialogOkna.right ||
-                    event.clientY < souradniceDialogOkna.top ||
-                    event.clientY > souradniceDialogOkna.bottom
-                ){
-                    dialogReakceElement.close();
-                }
-            })
-        }
-}
-   
-
-
-if (vytvoritDiskusiBtn){
-    vytvoritDiskusiBtn.addEventListener("click", (event)=>{
-        dialogVytvoritDiskusi.showModal();
-    })
-
-    dialogVytvoritDiskusi.addEventListener("click", (event)=>{
-        let souradniceDialogOkna = dialogVytvoritDiskusi.getBoundingClientRect();
-        if(
-            event.clientX < souradniceDialogOkna.left ||
-            event.clientX > souradniceDialogOkna.right ||
-            event.clientY < souradniceDialogOkna.top ||
-            event.clientY > souradniceDialogOkna.bottom
-        ){
-            dialogVytvoritDiskusi.close();
-        }
-    })
-}
-
-if(napsatKomentarBtn){
-    napsatKomentarBtn.addEventListener("click", (event)=>{
-        dialogNapsatKomentar.showModal();
-    })
-    dialogNapsatKomentar.addEventListener("click", (event)=>{
-        let souradniceDialogOkna = dialogNapsatKomentar.getBoundingClientRect();
-        if(
-            event.clientX < souradniceDialogOkna.left ||
-            event.clientX > souradniceDialogOkna.right ||
-            event.clientY < souradniceDialogOkna.top ||
-            event.clientY > souradniceDialogOkna.bottom
-        ){
-            dialogNapsatKomentar.close();
-        }
-    })
-}
-
-dialogPrihlasitRegistrovat.addEventListener("click", (event)=>{
-    let souradniceDialogOkna = dialogPrihlasitRegistrovat.getBoundingClientRect();
+function zavriDialogoveOkno (event)
+{
+    let dialogoveOkno = event.target;
+    let souradniceDialogOkna = dialogoveOkno.getBoundingClientRect();
     if(
         event.clientX < souradniceDialogOkna.left ||
         event.clientX > souradniceDialogOkna.right ||
         event.clientY < souradniceDialogOkna.top ||
         event.clientY > souradniceDialogOkna.bottom
     ){
-        dialogPrihlasitRegistrovat.close();
+        dialogoveOkno.close();
     }
+}
 
-});
+dialogPrihlasitRegistrovat.addEventListener("click", (event)=>zavriDialogoveOkno(event));
+   
+function napsatReakciNaKomentar(IdFormulare){
+        let dialogReakceId = "dialogReakce-" + IdFormulare;
+        let dialogReakceElement =  document.getElementById(dialogReakceId);
+        if(dialogReakceElement){
+            dialogReakceElement.showModal();
+            dialogReakceElement.addEventListener("click", (event)=>zavriDialogoveOkno(event))
+        }
+}
+
+if (vytvoritDiskusiBtn){
+    vytvoritDiskusiBtn.addEventListener("click", (event)=>{
+        dialogVytvoritDiskusi.showModal();
+    })
+    dialogVytvoritDiskusi.addEventListener("click", (event)=>zavriDialogoveOkno(event))
+}
+
+if(napsatKomentarBtn){
+    napsatKomentarBtn.addEventListener("click", (event)=>{
+        dialogNapsatKomentar.showModal();
+    })
+    dialogNapsatKomentar.addEventListener("click", (event)=>zavriDialogoveOkno())
+}
 
 dialogRegistrovatSeBtn.addEventListener("click", (event)=>{
     prihlasitSeForm.classList.remove('show');

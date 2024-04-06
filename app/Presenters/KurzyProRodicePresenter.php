@@ -6,14 +6,21 @@ namespace App\Presenters;
 use Nette;
 use App\Models\UzivateleManager;
 use App\Presenters\ZakladniPresenter;
+use App\Models\ProduktManager;
 use Nette\Http\Session;
 
 class KurzyProRodicePresenter extends ZakladniPresenter{
     public function __construct(
-        UzivateleManager $uzivateleManager,
-        Session $session
+        protected UzivateleManager $uzivateleManager,
+        private ProduktManager $produktManager,
+        protected Session $session
         )
     {
         parent::__construct($uzivateleManager, $session);
+    }
+
+    public function renderDefault(){
+        $kurzy = $this->produktManager->vypisProdukty('kurzy');
+        $this->template->kurzy = $kurzy;
     }
 }

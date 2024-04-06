@@ -1,5 +1,20 @@
 {layout '../@layout.latte'}
 
 {block content}
-<h1>Hracky</h1>
+<h1>Hračky</h1>
+<div class="product-list-page">
+   {foreach $hrackyDo3 as $produkt}
+    <div class="product-card">
+        <div class="product-card-content">
+            <a href="{$produkt['UrlObchod']}" target="blank">
+                <h3><strong>{$produkt["Nazev"]}</strong></h3>
+                <img src="{$basePath}/{$produkt["HlavniObrazek"]}">
+                <p>{$produkt["Popis"]}</p>
+                <p>{$produkt["Cena"]},- Kč</p>
+            </a>
+        </div>
+        <a href="{$produkt['UrlSrovnavac']}" target="blank" class="srovnavacCenyBtn">Srovnani vyvoje ceny</a>
+    </div>
+    {/foreach}
+</div>
 {/block content}

@@ -6,14 +6,21 @@ namespace App\Presenters;
 use Nette;
 use App\Presenters\ZakladniPresenter;
 use App\Models\UzivateleManager;
+use App\Models\ProduktManager;
 use Nette\Http\Session;
 
 class HrackyPresenter extends ZakladniPresenter{
     public function __construct(
-        UzivateleManager $uzivateleManager,
-        Session $session
+        protected UzivateleManager $uzivateleManager,
+        private ProduktManager $produktManager,
+        protected Session $session
         )
     {
         parent::__construct($uzivateleManager, $session);
+    }
+
+    public function renderDefault(){
+        $hrackyDo3 = $this->produktManager->vypisProdukty('hrackyDo3');
+        $this->template->hrackyDo3 = $hrackyDo3;
     }
 }

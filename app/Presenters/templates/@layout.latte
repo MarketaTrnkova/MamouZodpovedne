@@ -11,7 +11,7 @@
 	<header>
 		<div class="header-top-banner">
 			<a href="{link Domu:Default }" class="logo-wrapper"><h3>mamouzodpovedne</h3></a>
-			<div class="user-icon-wrapper" onclick="otevriDialogoveOkno()">&#128100; {if $jePrihlasen}<span>{$sessionPoleDat['prezdivka']}</span>{/if}</div>
+			<div class="user-icon-wrapper" onclick="otevriPrihlasovaciDialogoveOkno()">&#128100; {if $jePrihlasen}<span>{$sessionPoleDat['prezdivka']}</span>{/if}</div>
 		</div>
 
 		<dialog class="prihlasit_registrovat_dialog">
@@ -46,17 +46,20 @@
 		<div class="header-main-banner">
 			<h2>Zodpovědný výběr hraček a příslušenství pro správný vývoj dítěte</h2>
 			<div class="header-main-banner-content-wrapper">
-				<div class="header-main-banner-content"> <p>Smysluplné hračky rozvíjející správný vývoj dítěte</p> </div>
-				<div class="header-main-banner-content"> <p>Pouze testované výrobky - zdraví nezávadné</p> </div>
-				<div class="header-main-banner-content"> <p>Srovnání vývoje ceny u každého produktu - zodpovědný výběr obchodů</p></div>
-				<div class="header-main-banner-content"> <p>Kurzy pro rodiče</p> </div>
-				<div class="header-main-banner-content"> <p>Diskuse ohledně výchovy, rodičovství a zdraví</p> </div>
+				<h3 class="hlaska">Stránka je aktuálně ve vývoji, pilně pracuji na tom, abych Vám mohla brzy nabídnout nejen zajímavý sortiment osvědčených produktůl pro rodiče, ale také maximální komformt při procházení tohoto webu. Děkuji za trpělivost a těším se na další setkání!</h3>
 			</div>
 		
 		</div>
 	</header>
+	<main>
 	{include content}
 
+	</main>
+
+	<footer class="footer-main">
+		<a href="{link Domu:Default }" class="logo-wrapper"><h3>mamouzodpovedne</h3></a>
+		<p>Vytvořila Markéta Trnková 2024</p>
+	</footer>
 
 	{block scripts}
 		<script src="https://unpkg.com/nette-forms@3/src/assets/netteForms.js"></script>

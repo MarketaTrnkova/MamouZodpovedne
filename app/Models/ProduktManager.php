@@ -12,7 +12,7 @@ class ProduktManager{
         private Explorer $explorer
     ){}
 
-    //kod pro kategorii Hracky do 3 let = hrackyDo3
+
     public function vypisProdukty(string $kodKategorie): array|false{
         $vysledek = $this->explorer
         ->query('SELECT "Produkty"."Nazev", "Produkty"."Cena", "Produkty"."Popis", "Produkty"."HlavniObrazek", "Produkty"."UrlObchod", "Produkty"."UrlSrovnavac" 
