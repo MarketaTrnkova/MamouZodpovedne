@@ -15,6 +15,13 @@ let prihlasitSeBtn = document.querySelector(".prihlasit-se-btn");
 let kategorieBtn = document.querySelectorAll("[kod-kategorie]");
 let kategorieForm = document.querySelector("#frm-vyberKategorii");
 let kategorieInput = document.querySelector("input[name='vybranaKategorie']");
+let flashMesage = document.querySelector(".alert");
+
+if (flashMesage){
+    setTimeout(function(){
+        flashMesage.style.display = "none";
+    }, 2500);
+} 
 
 /* dat sem parametr s nazvem elementu pro ktery se spusti showModal*/
 function otevriPrihlasovaciDialogoveOkno(){

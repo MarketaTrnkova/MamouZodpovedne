@@ -11,8 +11,16 @@
 	<header>
 		<div class="header-top-banner">
 			<a href="{link Domu:Default }" class="logo-wrapper"><h3>mamouzodpovedne</h3></a>
+
+			{foreach $flashes as $flash}
+				<div class="alert alert-{$flash->type}">
+					<p>{$flash->message}</p>
+				</div>
+			{/foreach}
+
 			<div class="user-icon-wrapper" onclick="otevriPrihlasovaciDialogoveOkno()">&#128100; {if $jePrihlasen}<span>{$sessionPoleDat['prezdivka']}</span>{/if}</div>
 		</div>
+
 
 		<dialog class="prihlasit_registrovat_dialog">
 			<div class="dialogBtns {if $jePrihlasen}hidden{/if}">

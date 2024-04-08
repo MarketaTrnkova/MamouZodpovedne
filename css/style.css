@@ -16,6 +16,18 @@ h1, h2, h3, h4{
     background-color: pink;
     padding: 0 1em;
 }
+.alert{
+    padding: 1em;
+    text-align: center;
+    flex-grow: 1;
+}
+.alert-success{
+    background-color: #fffff7;
+}
+.alert-error{
+    background-color: red;
+}
+
 nav{
     display: flex;
     justify-content: center;

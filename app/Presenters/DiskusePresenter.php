@@ -36,7 +36,14 @@ class DiskusePresenter extends ZakladniPresenter{
         $form->addSelect('kategorie', 'Kategorie:')
         ->setItems($this->diskuseManager->vratKategorie());
         $form->addSubmit('vytvoritDiskusiSubmit', 'Vytvořit diskusi');
-        $form->onSuccess[] = $this->diskuseManager->vytvoritDiskusiSuccess(...);
+        $form->onSuccess[] = function(Form $form, \stdClass $dataFormulare){
+            $vysledekZpracovaniFormulare = $this->diskuseManager->vytvoritDiskusiSuccess($form, $dataFormulare);
+            if ($vysledekZpracovaniFormulare){
+                $this->flashMessage('Diskuse vytvořena','success');
+            }else{
+                $this->flashMessage('Nepodařilo se vytvořit diskusi', 'error');
+            }
+        };
         return $form;
     }
 
@@ -50,15 +57,14 @@ class DiskusePresenter extends ZakladniPresenter{
         ->setRequired('Prosím, napište text komentáře.');
         $form->addHidden('diskuseId', $this->detailDiskuse->DiskuseId);
         $form->addSubmit('pridaKomentarSubmit', 'Přidat Komentář');
-/*         $uniqueId = rand(); // kazdy vygenerovany formular bude mit specificke id
-
-        $form->getElementPrototype()->id = 'form-' . $uniqueId; */
 
         $form->onSuccess[] = function (Form $form, \stdClass $dataFomulare){
             $vysledekSuccesFunkce = $this->diskuseManager->vytvoritKomentarSucces($form,$dataFomulare);
             if ($vysledekSuccesFunkce){
-                $this->flashMessage('Komentář úspěšně odeslán');
+                $this->flashMessage('Komentář úspěšně odeslán', 'success');
                 $this->redirect('this');
+            }else{
+                $this->flashMessage('Nepodařilo se vložit komentář');
             }
         };
         return $form;
@@ -123,6 +129,5 @@ class DiskusePresenter extends ZakladniPresenter{
        $this->template->komentareKDiskusi=$this->diskuseManager->vratKomentareKDiskusi($title);
        $this->template->vedlejsiKomentare=$this->diskuseManager->vratVedlejsiKomentare();
     }
-
     
 }

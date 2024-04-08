@@ -17,7 +17,6 @@ class UzivateleManager
     public function __construct(
         private Explorer $explorer,
         protected Session $session){
-
     }
 
     public function registrujMe(Form $form, \stdClass $dataFomulare){
@@ -31,10 +30,13 @@ class UzivateleManager
             ]);
             if ($vlozenyRadek instanceof \Nette\Database\Table\ActiveRow){
                 $this->prihlasMe($form, $dataFomulare);
-                return 'Registrace proběhla v pořádku';
+                return true;
+            } else{
+                return false;
             }
-        } catch(UniqueConstraintViolationException $e){
+        }catch(UniqueConstraintViolationException $e){
             $form->addError('Nevalidní data.');
+            return false;
         }
     }
 
@@ -50,17 +52,20 @@ class UzivateleManager
                     $sessionSection->uzivatelId = $radekZDb->UzivateleId;
                     $sessionSection->jePrihlasen = true;
                     $this->jePrihlasen = true; 
-                    return;
+                    return true;
                 }else{
                     $form->addError('Neplatné údaje.');
+                    return false;
                 }
             }else{
                 $this->odhlasMe();
                 $form->addError('Uživatel s daným emailem nebyl nalezen');
+                return false;
             }
         }catch(Exception $e){
             $form->addError('Neplatné údaje.');
             $this->jePrihlasen = false; 
+            return false;
         }
     }
     public function zkontrolujPrezdivku($input, $data){
@@ -94,5 +99,6 @@ class UzivateleManager
         $sessionSection->remove('prezdivka');
         $sessionSection->remove('jePrihlasen');
         $this->jePrihlasen = false; 
+        return true;
     }
 }
