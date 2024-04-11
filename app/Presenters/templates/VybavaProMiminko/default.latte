@@ -1,20 +1,22 @@
 {layout '../@layout.latte'}
 
 {block content}
-<h1>Výbava pro miminko</h1>
-<div class="product-list-page">
-   {foreach $vybavaProMiminko as $produkt}
-    <div class="product-card">
-        <div class="product-card-content">
-            <a href="{$produkt['UrlObchod']}" target="blank">
-                <h3><strong>{$produkt["Nazev"]}</strong></h3>
-                <img src="{$basePath}/{$produkt["HlavniObrazek"]}">
-                <p>{$produkt["Popis"]}</p>
-                <p>{$produkt["Cena"]},- Kč</p>
-            </a>
-        </div>
-        <a href="{$produkt['UrlSrovnavac']}" target="blank" class="srovnavacCenyBtn">Srovnani vyvoje ceny</a>
-    </div>
-    {/foreach}
+<h2>Výbava pro miminko</h2>
+<div class="product-wrapper">
+       {foreach $vybavaProMiminko as $produkt}
+            <div class="card">
+                <a href="{$produkt['UrlObchod']}" target="blank">
+                    <div class="image-card-wrapper">
+                        <img  src="{$basePath}/{$produkt["HlavniObrazek"]}" alt="Card image cap">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>{$produkt["Nazev"]}</strong></h5>
+                        <p class="card-text">{$produkt["Popis"]}</p>
+                        <p>{$produkt["Cena"]},- Kč</p>
+                        <a href="{$produkt['UrlSrovnavac']}" target="blank"  class="btn btn-primary">Cenový srovnávač</a>
+                    </div>
+                </a>
+            </div>
+        {/foreach}
 </div>
 {/block content}

@@ -16,6 +16,7 @@ let kategorieBtn = document.querySelectorAll("[kod-kategorie]");
 let kategorieForm = document.querySelector("#frm-vyberKategorii");
 let kategorieInput = document.querySelector("input[name='vybranaKategorie']");
 let flashMesage = document.querySelector(".alert");
+let hamburgerMenu = document.querySelector(".navbar-toggler");
 
 if (flashMesage){
     setTimeout(function(){
@@ -23,9 +24,22 @@ if (flashMesage){
     }, 2500);
 } 
 
-/* dat sem parametr s nazvem elementu pro ktery se spusti showModal*/
 function otevriPrihlasovaciDialogoveOkno(){
     dialogPrihlasitRegistrovat.showModal();
+}
+
+if (hamburgerMenu){
+    let hamburgerOpen = document.querySelector(".bi-list");
+    let hamburgerClose = document.querySelector(".bi-x-lg");
+
+    hamburgerMenu.addEventListener("click", (event)=>{
+        hamburgerOpen.classList.toggle('hidden');
+        hamburgerClose.click();
+    });
+    hamburgerClose.addEventListener("click", (event)=>{
+        hamburgerClose.classList.toggle('hidden');
+        hamburgerOpen.click();
+    })
 }
 
 function zavriDialogoveOkno (event)
@@ -43,7 +57,8 @@ function zavriDialogoveOkno (event)
 }
 
 dialogPrihlasitRegistrovat.addEventListener("click", (event)=>zavriDialogoveOkno(event));
-   
+
+
 function napsatReakciNaKomentar(IdFormulare){
         let dialogReakceId = "dialogReakce-" + IdFormulare;
         let dialogReakceElement =  document.getElementById(dialogReakceId);
@@ -68,21 +83,21 @@ if(napsatKomentarBtn){
 }
 
 dialogRegistrovatSeBtn.addEventListener("click", (event)=>{
-    prihlasitSeForm.classList.remove('show');
+    prihlasitSeForm.classList.remove('showElement');
     prihlasitSeForm.classList.add('hidden');
     dialogPrihlasitSeBtn.classList.remove('activeBtn');
     dialogRegistrovatSeBtn.classList.add('activeBtn');
     registrovatSeForm.classList.remove('hidden');
-    registrovatSeForm.classList.add('show');
+    registrovatSeForm.classList.add('showElement');
 });
 
 dialogPrihlasitSeBtn.addEventListener("click", (event)=>{
-    registrovatSeForm.classList.remove('show');
+    registrovatSeForm.classList.remove('showElement');
     registrovatSeForm.classList.add('hidden');
     dialogRegistrovatSeBtn.classList.remove('activeBtn');
     dialogPrihlasitSeBtn.classList.add('activeBtn');
     prihlasitSeForm.classList.remove('hidden');
-    prihlasitSeForm.classList.add('show');
+    prihlasitSeForm.classList.add('showElement');
 });
 
 function vyberKategorii ($kod){

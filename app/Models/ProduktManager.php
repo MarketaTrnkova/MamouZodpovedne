@@ -15,7 +15,7 @@ class ProduktManager{
 
     public function vypisProdukty(string $kodKategorie): array|false{
         $vysledek = $this->explorer
-        ->query('SELECT "Produkty"."Nazev", "Produkty"."Cena", "Produkty"."Popis", "Produkty"."HlavniObrazek", "Produkty"."UrlObchod", "Produkty"."UrlSrovnavac" 
+        ->query('SELECT "Produkty"."Nazev", "Produkty"."ProduktyId", "Produkty"."Cena", "Produkty"."Popis", "Produkty"."HlavniObrazek", "Produkty"."UrlObchod", "Produkty"."UrlSrovnavac" 
         FROM "Produkty" 
         INNER JOIN "Produkty_ProduktyKategorie" ON "Produkty_ProduktyKategorie"."ProduktyId" = "Produkty"."ProduktyId"
         INNER JOIN "ProduktyKategorie" ON "Produkty_ProduktyKategorie"."ProduktyKategorieId" = "ProduktyKategorie"."ProduktyKategorieId" 
