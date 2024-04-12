@@ -116,6 +116,7 @@ class DiskuseManager{
         ->select('Komentare.KomentareId, Komentare.HlavniKomentarId, Uzivatele.Prezdivka AS Prezdivka, Komentare.Cas, Komentare.Obsah')
         ->where('Komentare.UzivateleId = Uzivatele.UzivateleId')
         ->where('DiskuseId IS NULL')
+        ->order('Komentare.Cas')
         ->fetchAll();
         return $komentare;
     }

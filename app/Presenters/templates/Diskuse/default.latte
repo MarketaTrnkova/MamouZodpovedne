@@ -1,29 +1,30 @@
 {layout '../@layout.latte'}
 
 {block content}
-<h1>Diskuse</h1>
+<h1 class="main-heading main-heading-diskuse">Diskuse</h1>
     <div class="dialog-wrapper">
     {if $jePrihlasen}
 
-            <button class="vytvoritDiskusiBtn">Vytvořit diskusi</button>
+            <button class="vytvoritDiskusiBtn button dark-btn">Vytvořit diskusi</button>
             <dialog class="vytvoritDiskusiDialog">
                 {control vytvoritDiskusi}
             </dialog>
     {else}
         <p>Pro vytvoření nové diskuse je nutné se přihlásit</p>
-        <button class="prihlasit-se-btn" onclick="otevriPrihlasovaciDialogoveOkno()">Přihlásit se</button>
+        <button class="button dark-btn" onclick="otevriPrihlasovaciDialogoveOkno()">Přihlásit se</button>
     {/if}
     </div>
-    <h2>Filtrovat diskuse podle kategorie</h2>
-    <div class="vyber-kategorii-wrapper">
-        {foreach $vsechnyKategorie as $kategorie}
-           <div class="kategorie-btn {if isset($aktivniKategorie) && ($aktivniKategorie ==$kategorie->Kod)}aktivniKategorie{/if}" kod-kategorie="{$kategorie->Kod}" onclick="vyberKategorii({$kategorie->Kod})" ><p>{$kategorie->Nazev}</p></div>
-        {/foreach}
+    <div class="section-green">
+        <h2 class="subtitle">Filtrovat diskuse podle kategorie</h2>
+        <div class="vyber-kategorii-wrapper">
+            {foreach $vsechnyKategorie as $kategorie}
+            <div class="button light-btn {if isset($aktivniKategorie) && ($aktivniKategorie ==$kategorie->Kod)}aktivniKategorie{/if}" kod-kategorie="{$kategorie->Kod}" onclick="vyberKategorii({$kategorie->Kod})" >{$kategorie->Nazev}</div>
+            {/foreach}
+        </div>
     </div>
-    {* do nadpisu h3 nize dam promennou, ktera bude zobrazovat nazev vybrane kategorie nebo defaultni hodnotu Nejnovější diskuse *}
 
     <div class="vypis-diskusi">
-        <h3>{$vybranaKategorie ?? 'Nejnovější diskuse'}</h3>
+        <h3 class="subtitle">{$vybranaKategorie ?? 'Nejnovější diskuse'}</h3>
         {control vyberKategorii}
         {foreach $vsechnyDiskuse as $diskuse}
             <div class="space-between">
@@ -34,7 +35,7 @@
             <p>{$diskuse->Obsah|truncate:400}</p>
             <div class="space-between">
                 <p>&#128236 Počet komentářů: {$diskuse->PocetKomentaru} </p>
-                <a class="vstoupit-do-diskuse-btn"  href="{$basePath}/diskuse/{$diskuse->Url}">Vstoupit do diskuse</a>
+                <a class="button light-btn"  href="{$basePath}/diskuse/{$diskuse->Url}">Vstoupit do diskuse</a>
             </div>
             <hr>
         {/foreach}

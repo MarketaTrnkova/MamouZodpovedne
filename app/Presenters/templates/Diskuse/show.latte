@@ -8,20 +8,21 @@
 </div>
 <p>{$detailDiskuse->Obsah}</p>
 <div class="komentare-k-diskusi">
-<h2>Komentáře k diskusi</h2>
-{if !$komentareKDiskusi}
-    <p>Diskuse nemá žádné komentáře</p>
-{/if}
-<div class="dialog-wrapper">
-{if $jePrihlasen}
-    <button class="napsat-komentar">Napsat komentář</button>
-    <dialog class="dialogNapsatKomentar">
-        {control vytvoritKomentar}
-    </dialog>
-{else}
-    <p>Pro přidání komentáře je nutné se přihlásit</p>
-    <button class="prihlasit-se-btn" onclick="otevriPrihlasovaciDialogoveOkno()">Přihlásit se</button>
-{/if}
+    <h2 class="subtitle">Komentáře k diskusi</h2>
+    {if !$komentareKDiskusi}
+        <p>Diskuse nemá žádné komentáře</p>
+    {/if}
+    <div class="dialog-wrapper">
+        {if $jePrihlasen}
+            <button class="button dark-btn napsat-komentar" id="napsat-komentar">Napsat komentář</button>
+            <dialog class="dialogNapsatKomentar">
+                {control vytvoritKomentar}
+            </dialog>
+        {else}
+            <p>Pro přidání komentáře je nutné se přihlásit</p>
+            <button class="button dark-btn" onclick="otevriPrihlasovaciDialogoveOkno()">Přihlásit se</button>
+        {/if}
+    </div>
 </div>
 {foreach $komentareKDiskusi as $komentar}
     <div>
@@ -30,7 +31,7 @@
     <p>{$komentar->ObsahKomentare}</p>
       
     {if $jePrihlasen}   
-                <button class="reagovat-btn" onclick="napsatReakciNaKomentar({$komentar->KomentareId})">Napsat reakci na komentář</button>
+                <button class="button light-btn" onclick="napsatReakciNaKomentar({$komentar->KomentareId})">Napsat reakci na komentář</button>
                 <dialog id="dialogReakce-{$komentar->KomentareId}">
                     <div class="form-wrapper">
                     {form vytvorReakciNaKomentar, 'id' =>$komentar->KomentareId }

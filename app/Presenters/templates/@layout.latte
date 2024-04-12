@@ -21,17 +21,18 @@
 
         <div class="d-none d-lg-flex">
             <ul class="navbar-nav flex-grow-1">
-                <li class="nav-item"><a class="nav-link" href="{link Hracky:Default}">Hračky</a></li>
-                <li class="nav-item"><a class="nav-link" href="{link VybavaProMiminko:Default}">Výbava pro miminko</a></li>
-                <li class="nav-item"><a class="nav-link" href="{link DetskyPokoj:Default}">Dětský pokoj</a></li>
-                <li class="nav-item"><a class="nav-link" href="{link KurzyProRodice:Default}">Kurzy pro rodiče</a></li>
-                <li class="nav-item"><a class="nav-link" href="{link Diskuse:default}">Diskuse</a></li>
+                <li class="nav-item"><a class="nav-link {if ($aktualniStranka == 'hracky')}aktivniStranka{/if}" href="{link Hracky:Default}">Hračky</a></li>
+                <li class="nav-item"><a class="nav-link {if ($aktualniStranka == 'vybavaProMiminko')}aktivniStranka{/if}" href="{link VybavaProMiminko:Default}">Výbava pro miminko</a></li>
+                <li class="nav-item"><a class="nav-link {if ($aktualniStranka == 'detskyPokoj')}aktivniStranka{/if}" href="{link DetskyPokoj:Default}">Dětský pokoj</a></li>
+                <li class="nav-item"><a class="nav-link {if ($aktualniStranka == 'kurzy')}aktivniStranka{/if}" href="{link KurzyProRodice:Default}">Kurzy pro rodiče</a></li>
+                <li class="nav-item"><a class="nav-link {if ($aktualniStranka == 'diskuse')}aktivniStranka{/if}" href="{link Diskuse:default}">Diskuse</a></li>
+				<li>
             </ul>
         </div>
 		   
 		<div class="uzivatel px-2 d-none d-lg-flex">
-			{if $jePrihlasen}<span class="me-2">{$sessionPoleDat['prezdivka']}</span>{/if}
-			<i class="bi bi-person-fill fs-3" onclick="otevriPrihlasovaciDialogoveOkno()"></i>
+			<span class="me-2 uzivatelSpan" onclick="otevriPrihlasovaciDialogoveOkno()">{if $jePrihlasen}{$sessionPoleDat['prezdivka']}{/if}
+			<i class="bi bi-person-fill fs-3" ></i></span>
 		</div>
 
         
@@ -43,13 +44,13 @@
     </nav>
 	<div class="collapse d-lg-none col" id="navBarMobile">
             <ul class="navbar-nav ms-auto text-center">
-                <li class="nav-item"><a class="nav-link" href="{link Hracky:Default}">Hračky</a></li>
-                <li class="nav-item"><a class="nav-link" href="{link VybavaProMiminko:Default}">Výbava pro miminko</a></li>
-                <li class="nav-item"><a class="nav-link" href="{link DetskyPokoj:Default}">Dětský pokoj</a></li>
-                <li class="nav-item"><a class="nav-link" href="{link KurzyProRodice:Default}">Kurzy pro rodiče</a></li>
-                <li class="nav-item"><a class="nav-link" href="{link Diskuse:default}">Diskuse</a></li>
+                <li class="nav-item"><a class="nav-link {if ($aktualniStranka == 'hracky')}aktivniStranka{/if}" href="{link Hracky:Default}">Hračky</a></li>
+                <li class="nav-item"><a class="nav-link {if ($aktualniStranka == 'vybavaProMiminko')}aktivniStranka{/if}" href="{link VybavaProMiminko:Default}">Výbava pro miminko</a></li>
+                <li class="nav-item"><a class="nav-link {if ($aktualniStranka == 'detskyPokoj')}aktivniStranka{/if}" href="{link DetskyPokoj:Default}">Dětský pokoj</a></li>
+                <li class="nav-item"><a class="nav-link {if ($aktualniStranka == 'kurzy')}aktivniStranka{/if}" href="{link KurzyProRodice:Default}">Kurzy pro rodiče</a></li>
+                <li class="nav-item"><a class="nav-link {if ($aktualniStranka == 'diskuse')}aktivniStranka{/if}" href="{link Diskuse:default}">Diskuse</a></li>
 				<li>
-					<span onclick="otevriPrihlasovaciDialogoveOkno()">
+					<span class="uzivatelSpan" onclick="otevriPrihlasovaciDialogoveOkno()">
 					<i class="bi bi-person-fill fs-3 me-2"></i>{if $jePrihlasen}{$sessionPoleDat['prezdivka']}</span>{/if}
 				</li>
 			</div>
@@ -69,8 +70,8 @@
 
 		<dialog class="prihlasit_registrovat_dialog">
 			<div class="dialogBtns {if $jePrihlasen}hidden{/if}">
-				<button class="dialogPrihlasitSeBtn activeBtn">Přihlásit se</button>
-				<button class="dialogRegistrovatSeBtn">registrovat</button></div>
+				<button class="button dialogPrihlasitSeBtn activeBtn">Přihlásit se</button>
+				<button class="button dialogRegistrovatSeBtn">registrovat</button></div>
 			<div class="dialogFormWrapper {if $jePrihlasen}hidden{/if}">
 				<div class="prihlasitSeForm">
 					{control prihlasitSe}

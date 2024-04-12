@@ -20,9 +20,11 @@ final class DetskyPokojPresenter extends ZakladniPresenter{
     {
         parent::__construct($uzivateleManager, $session);
     }
+
     public function renderDefault(){
         $detskyPokoj = $this->produktManager->vypisProdukty('detskyPokoj');
-        $this->template->detskyPokoj = $detskyPokoj;
+        $this->template->aktualniStranka= 'detskyPokoj';
+        $this->template->detskyPokoj=  $detskyPokoj;
     }
 
 }

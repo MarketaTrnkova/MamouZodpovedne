@@ -14,14 +14,20 @@
 
 h1, h2, h3, h4{
     text-align: center;
-    padding: 1em;
+    padding: 1em 1em 0.5em 1em;
+    color: var(--cl-black);
+    font-weight: 800;
 }
 
 h1{
     font-size: 1.5rem;
 }
+a{
+    text-decoration: none;
+}
 
 .main-heading{
+    padding-top: 0;
     font-weight: 800;
     color: var(--cl-pink);
 }
@@ -52,6 +58,24 @@ h1{
     color: var(--cl-grey);
 }
 
+.button{
+    display: flex;
+    padding: 0.5em 0.8em;
+    border-radius: 10px;
+    border: none;
+    justify-content: center;
+    background-color: var(--cl-light-pink);
+    color: var(--cl-pink);
+    cursor: pointer;
+}
+.light-btn{
+    background-color: var(--cl-light-pink);
+    color: var(--cl-pink);
+}
+.dark-btn{
+    background-color: var(--cl-pink);
+    color: var(--cl-light-pink);
+}
 .nav-item .nav-link{
     color: var(--cl-grey);
 }
@@ -93,8 +117,23 @@ h1{
         outline: none;
         box-shadow: none;
 }
+.aktivniStranka{
+    position: relative;
+}
+
+.aktivniStranka::after{
+    content: "";
+    display: block;
+    position: absolute;
+    width:5rem;
+    height: 2px;
+    background-color: var(--cl-pink);
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 .info-hlaska{
+    color: var(--cl-grey);
     font-size: 1rem;
     font-weight: 400;
 }
@@ -109,9 +148,9 @@ dialog{
     padding: 3em;
     border: none;
     border-radius: 20px;
-    width: 80%;
-    max-width: 1200px;
-    top: 30%;
+    width: 90%;
+    max-width: 1000px;
+    top: 15%;
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.596);
     backdrop-filter: blur(20px);
@@ -121,23 +160,72 @@ dialog input[type='text'], textarea{
     padding: 5px;
     border-radius: 10px;
     margin-bottom: 5px;
+    border: none;
 }
 
+textarea{
+    height: 30vh;
+    width: 100% ;
+}
+form input[name='reakceSubmit']{
+    margin-top: 0.5rem;
+    display: flex;
+    padding: 0.5em 1em !important;
+    border-radius: 10px;
+    border: none;
+    justify-content: center;
+    background-color: var(--cl-light-pink);
+    color: var(--cl-pink);
+}
 dialog::backdrop {
     background-color: rgba(29, 19, 27, 0.242);;
     border: none;
-  }
+}
+#frm-vytvorReakciNaKomentar-textKomentare{
+    height: 30vh;
+    width:100%;
+}
 .dialogBtns{
     display: flex;
     justify-content: center;
 }
+
 .prihlasitSeForm, .registrovatSeForm{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
     margin: 0.5rem;
 }
+.uzivatelSpan{
+    cursor: pointer;
+}
+
+form input[name='prihlasitSe'], form input[name='registrovatSe']{
+    margin-top: 0.5rem;
+}
+
+form, form table, form table input {
+    width: 100%;
+}
+
+form label{
+    color: var(--cl-black);
+}
+
+form td > *{
+    background-color: white !important;
+    border: none;
+    padding: .3rem;
+    border-radius: 10px;
+}
+
+
+form table tr{
+display: flex;
+flex-direction: column;
+gap: 0.1rem;
+}
+
 
 .showElement{
     display: flex;
@@ -148,7 +236,9 @@ dialog::backdrop {
 }
 
 .activeBtn{
-    background-color: aqua;
+    background-color: var(--cl-pink);
+    color: var(--cl-light-pink);
+    border: 2px solid white;
 }
 
 main{
@@ -193,53 +283,83 @@ main{
     font-size: 1rem;
 }
 
-/* product list jednotlive stranky */
-
-.product-card{
-
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary{
+    display: flex;
+    background-color: var(--cl-pink);
+    color: var(--cl-light-pink);
+    justify-content: center;
+    border: none;
 }
+
+/* product list jednotlive stranky */
 
 
 /******************* DISKUSE ***********************/
+.main-heading-diskuse{
+    padding-top: 1rem;
+    font-size: 1.8rem;
+    color: var(--cl-black);
+    padding-bottom: 0.5rem;
+}
+.subtitle{
+    padding-top: 40px;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
 .space-between{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+.space-between p{
+    margin: 0;
 }
 
 .vstoupit-do-diskuse-btn{
-    padding: 1rem;
+    display: flex;
+    padding: 0.5em;
     border-radius: 10px;
-    background-color: aliceblue;
+    background-color: var(--cl-light-pink);
+    color: var(--cl-pink);
+    justify-content: center;
+    text-align: center;
+}
+
+.section-green{
+    margin-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    background-color: var(--cl-light-pink);
+}
+.komentare-k-diskusi{
+    padding-bottom: 2rem;
 }
 
 .vyber-kategorii-wrapper{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    align-items: center;
+}
+.vyber-kategorii-wrapper .light-btn{
+background-color: white;
 }
 
 .vypis-diskusi{
     padding: 1rem;
 }
 
-.kategorie-btn{
-    padding: 0.5rem;
-    margin: 0.5rem;
-    border:1px solid blue;
-    border-radius: 0.5rem;
-    cursor: pointer;
-}
-
-.kategorie-btn:hover{
-    background-color: aliceblue;
-}
-
 .aktivniKategorie{
-    border: 3px solid blue;
-    background-color: aliceblue;
+    border: 2px solid var(--cl-pink);
+    background-color: var(--cl-light-pink);
 }
 
 .vedlejsi-komentare{
-    background-color: rgba(250, 235, 215, 0.511);
+    background-color: var(--cl-light-pink);
     padding-left: 1rem;
 }
 
@@ -275,7 +395,6 @@ main{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
-
 
 
 @media screen and (min-width: 580px) {   

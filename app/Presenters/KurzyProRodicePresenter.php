@@ -22,5 +22,6 @@ class KurzyProRodicePresenter extends ZakladniPresenter{
     public function renderDefault(){
         $kurzy = $this->produktManager->vypisProdukty('kurzy');
         $this->template->kurzy = $kurzy;
+        $this->template->aktualniStranka = 'kurzy';
     }
 }

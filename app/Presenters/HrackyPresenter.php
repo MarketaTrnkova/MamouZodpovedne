@@ -22,5 +22,6 @@ class HrackyPresenter extends ZakladniPresenter{
     public function renderDefault(){
         $hrackyDo3 = $this->produktManager->vypisProdukty('hrackyDo3');
         $this->template->hrackyDo3 = $hrackyDo3;
+        $this->template->aktualniStranka = 'hracky';
     }
 }

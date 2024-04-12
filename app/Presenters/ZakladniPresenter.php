@@ -10,9 +10,11 @@ use App\Models\UzivateleManager;
 use Nette\Http\Session;
 
 class ZakladniPresenter extends Nette\Application\UI\Presenter{
+
     public function __construct(
         protected UzivateleManager $uzivateleManager,
         protected Session $session
+
     ){
         parent::__construct();
     }
@@ -35,7 +37,7 @@ class ZakladniPresenter extends Nette\Application\UI\Presenter{
     public function createComponentPrihlasitSe(): Form{
         $form = new Form;
 
-        $form->addEmail('email', 'email')
+        $form->addEmail('email', 'Email')
              ->setRequired('Prosím, zadejte svůj email.');
     
         $form->addPassword('heslo', 'Heslo')
@@ -60,7 +62,7 @@ class ZakladniPresenter extends Nette\Application\UI\Presenter{
              ->setRequired('Prosím, zadejte svůj email.')
              ->addCondition(Nette\Forms\Form::Filled)
              ->addRule([$this->uzivateleManager, 'zkontrolujEmail'], 'Uživatel s tímto emailem již existuje');
-        $form->addText('prezdivka', 'zadejte přezdívku')
+        $form->addText('prezdivka', 'Přezdívka')
             ->setRequired('Prosím, zadejte přezdívku.')
             ->addCondition(Nette\Forms\Form::Filled)
             ->addRule([$this->uzivateleManager, 'zkontrolujPrezdivku'], 'Přezdívka je již obsazená jiným uživatelem');

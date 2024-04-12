@@ -21,5 +21,6 @@ class  VybavaProMiminkoPresenter extends ZakladniPresenter{
     public function renderDefault(){
         $vybavaProMiminko = $this->produktManager->vypisProdukty('vybavaProMiminko');
         $this->template->vybavaProMiminko = $vybavaProMiminko;
+        $this->template->aktualniStranka = 'vybavaProMiminko';
     }
 }

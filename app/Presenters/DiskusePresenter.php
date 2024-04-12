@@ -31,7 +31,7 @@ class DiskusePresenter extends ZakladniPresenter{
         $form->addText('nadpisDiskuse', 'Nadpis')
         ->setRequired('Prosím, vyplňte nadpis.');
 
-        $form->addText('textDiskuse', 'Text diskuse')
+        $form->addTextArea('textDiskuse', 'Text diskuse')
         ->setRequired('Prosím, vyplňte text diskuse');
         $form->addSelect('kategorie', 'Kategorie:')
         ->setItems($this->diskuseManager->vratKategorie());
@@ -53,7 +53,7 @@ class DiskusePresenter extends ZakladniPresenter{
     }
     public function createComponentVytvoritKomentar(): Form{
         $form = new Form();
-        $form->addText('textKomentare', 'Váš komentář')
+        $form->addTextArea('textKomentare', 'Váš komentář')
         ->setRequired('Prosím, napište text komentáře.');
         $form->addHidden('diskuseId', $this->detailDiskuse->DiskuseId);
         $form->addSubmit('pridaKomentarSubmit', 'Přidat Komentář');
@@ -121,6 +121,7 @@ class DiskusePresenter extends ZakladniPresenter{
             $this->template->aktivniKategorie = $this->kodAktualniKategorie;
         }else {
         $this->template->vsechnyDiskuse = $this->diskuseManager->vratDiskuseZDb();
+        $this->template->aktualniStranka = 'diskuse';
         }
     }
     public function renderShow(string $title){

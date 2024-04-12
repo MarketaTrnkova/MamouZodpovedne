@@ -2,7 +2,7 @@ let userIcon = document.querySelector(".user-icon-wrapper");
 let vytvoritDiskusiBtn = document.querySelector(".vytvoritDiskusiBtn");
 let dialogPrihlasitRegistrovat = document.querySelector(".prihlasit_registrovat_dialog");
 let napsatReakciNaKomentarBtn = document.querySelector(".reagovat-btn");
-let napsatKomentarBtn = document.querySelector(".napsat-komentar");
+let napsatKomentarBtn = document.querySelector("#napsat-komentar");
 let dialogNapsatKomentar = document.querySelector(".dialogNapsatKomentar");
 let dialogVytvoritDiskusi = document.querySelector(".vytvoritDiskusiDialog");
 let hlavniKomentarIdInput = document.querySelector("input[name='hlavniKomentarId']");
@@ -79,7 +79,7 @@ if(napsatKomentarBtn){
     napsatKomentarBtn.addEventListener("click", (event)=>{
         dialogNapsatKomentar.showModal();
     })
-    dialogNapsatKomentar.addEventListener("click", (event)=>zavriDialogoveOkno())
+    dialogNapsatKomentar.addEventListener("click", (event)=>zavriDialogoveOkno(event))
 }
 
 dialogRegistrovatSeBtn.addEventListener("click", (event)=>{
